@@ -1,0 +1,129 @@
+{
+  "run": [{
+    "method": "shell.run",
+    "params": {
+      "message": "npm init -y"
+    }
+  }, {
+    "method": "shell.run",
+    "params": {
+      "message": "npm install decompress"
+    }
+  }, {
+    "method": "shell.run",
+    "params": {
+      "message": "git clone https://github.com/rese1f/StableVideo"
+    }
+  }, {
+    "method": "shell.run",
+    "params": {
+      "message": "{{os.platform() === 'win32' ? 'python' : 'python3'}} -m venv env",
+      "path": "StableVideo"
+    }
+  }, {
+    "method": "shell.start",
+    "params": {
+      "path": "StableVideo"
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "{{os.platform() === 'win32' ? 'conda_hook' : 'eval \"$(conda shell.bash hook)\"'}}",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "conda create -y -n stablevideo python=3.11",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "conda install -y \"ffmpeg<5\" -c  conda-forge -p stablevideo",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "{{os.platform() === 'win32' ? 'env\\\\Scripts\\\\activate' : 'source env/bin/activate'}} env",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "npx --yes torchcraft@0.0.12",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "pip install -r torchcraft.txt",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "pip install -r requirements.txt",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "fs.download",
+    "params": {
+      "url": "https://huggingface.co/lllyasviel/ControlNet/resolve/main/models/control_sd15_depth.pth",
+      "path": "StableVideo/ckpt/control_sd15_depth.pth"
+    }
+  }, {
+    "method": "fs.download",
+    "params": {
+      "url": "https://huggingface.co/lllyasviel/ControlNet/resolve/main/models/control_sd15_canny.pth",
+      "path": "StableVideo/ckpt/control_sd15_canny.pth"
+    }
+  }, {
+    "method": "fs.download",
+    "params": {
+      "url": "https://github.com/cocktailpeanut/bin/releases/download/nla_share/nla_share.zip",
+      "path": "StableVideo/nla_share.zip"
+    }
+  }, {
+    "uri": "./index.js",
+    "method": "unzip"
+  }, {
+    "method": "fs.rm",
+    "params": {
+      "path": "StableVideo/nla_share.zip"
+    }
+  }, {
+    "method": "input",
+    "params": {
+      "title": "Install Success",
+      "description": "Go back to the dashboard and launch the app!"
+    }
+  }, {
+    "method": "browser.open",
+    "params": {
+      "uri": "/?selected=StableVideo"
+    }
+  }]
+}

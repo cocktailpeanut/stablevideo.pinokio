@@ -1,0 +1,43 @@
+{
+  "run": [{
+    "method": "shell.start",
+    "params": {
+      "path": "StableVideo",
+      "env": {
+        "path": ["{{os.platform() === 'win32' ? path.resolve(cwd, 'StableVideo', 'stablevideo', 'Library', 'bin') : path.resolve(cwd, 'StableVideo', 'stablevideo', 'bin')}}"]
+      }
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "{{os.platform() === 'win32' ? 'env\\\\Scripts\\\\activate' : 'source env/bin/activate'}} env",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "{{os.platform() === 'win32' ? 'python' : 'python3'}} app.py",
+      "on": [{
+        "event": "/(http:\/\/[0-9.:]+)/",
+        "return": "{{event.matches[0][1]}}"
+      }]
+    }
+  }, {
+    "method": "self.set",
+    "params": {
+      "session.json": {
+        "url": "{{input}}"
+      }
+    }
+  }, {
+    "method": "browser.open",
+    "params": {
+      "uri": "/?selected=StableVideo"
+    }
+  }, {
+    "method": "process.wait" 
+  }]
+}
