@@ -37,7 +37,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "conda create -y -n stablevideo python=3.11",
+      "message": "conda create -y -n stablevideo",
       "on": [{
         "event": null,
         "return": true
@@ -64,7 +64,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "pip install -r requirements.txt",
+      "message": "npx --yes torchcraft@0.0.12",
       "on": [{
         "event": null,
         "return": true
@@ -73,7 +73,16 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "pip install xformers",
+      "message": "pip install -r torchcraft.txt",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "pip install -r requirements.txt",
       "on": [{
         "event": null,
         "return": true

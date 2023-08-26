@@ -2,10 +2,7 @@
   "run": [{
     "method": "shell.start",
     "params": {
-      "path": "StableVideo",
-      "env": {
-        "path": ["{{os.platform() === 'win32' ? path.resolve(cwd, 'StableVideo', 'stablevideo', 'Library', 'bin') : path.resolve(cwd, 'StableVideo', 'stablevideo', 'bin')}}"]
-      }
+      "path": "StableVideo"
     }
   }, {
     "method": "shell.enter",
